@@ -120,7 +120,7 @@ class CameraModule : Serializable {
                     put(MediaStore.Images.Media.RELATIVE_PATH, relativePath)
                 }
 
-                val bitmap = getBitmapFromUri(contentResolver, currentFileUri!!)
+                val imageInputStream = contentResolver.openInputStream(currentFileUri!!)
                 contentResolver.run {
                     val url =
                         if (config.rootDirectory == RootDirectory.DOWNLOADS) MediaStore.Downloads.EXTERNAL_CONTENT_URI
@@ -128,8 +128,9 @@ class CameraModule : Serializable {
 
                     newFileUri = contentResolver.insert(url, values)
                     if (newFileUri != null) {
-                        val imageOutputStream = openOutputStream(newFileUri!!)
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, imageOutputStream)
+                        openOutputStream(newFileUri!!)?.also { out ->
+                            imageInputStream?.copyTo(out)
+                        }
 
                         val images = arrayListOf(
                             Image(newFileUri!!, currentFileName!!, 0, config.subDirectory!!)
