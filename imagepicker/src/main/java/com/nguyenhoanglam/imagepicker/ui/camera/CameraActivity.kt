@@ -28,13 +28,12 @@ import java.util.*
 class CameraActivity : AppCompatActivity() {
 
     companion object {
-        private val cameraModule = CameraModule()
+        private var cameraModule = CameraModule()
     }
 
     private lateinit var binding: ImagepickerActivityCameraBinding
     private lateinit var config: ImagePickerConfig
 
-    private val cameraModule = CameraModule()
     private var alertDialog: AlertDialog? = null
     private var isOpeningCamera = false
 
