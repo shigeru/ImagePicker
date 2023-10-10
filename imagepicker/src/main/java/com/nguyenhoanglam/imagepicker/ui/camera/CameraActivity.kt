@@ -25,11 +25,13 @@ import com.nguyenhoanglam.imagepicker.model.Image
 import com.nguyenhoanglam.imagepicker.model.ImagePickerConfig
 
 class CameraActivity : AppCompatActivity() {
+    companion object {
+        private var cameraModule = CameraModule()
+    }
 
     private lateinit var binding: ImagepickerActivityCameraBinding
     private lateinit var config: ImagePickerConfig
 
-    private val cameraModule = CameraModule()
     private var alertDialog: AlertDialog? = null
     private var isOpeningCamera = false
 
