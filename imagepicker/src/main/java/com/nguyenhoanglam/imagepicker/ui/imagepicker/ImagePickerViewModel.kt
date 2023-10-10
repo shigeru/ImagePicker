@@ -94,8 +94,10 @@ class ImagePickerViewModel(application: Application) : AndroidViewModel(applicat
 
                     val uri = ContentUris.withAppendedId(imageCollectionUri, id)
 
-                    val image = Image(uri, name, bucketId, bucketName)
-                    images.add(image)
+                    if (name != null) {
+                        val image = Image(uri, name, bucketId, bucketName)
+                        images.add(image)
+                    }
                 }
                 cursor.close()
                 images
